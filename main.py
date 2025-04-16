@@ -17,5 +17,13 @@ async def start_handler(message: Message):
 async def status_handler(message: Message):
     await send_task_status(bot, ADMIN_CHAT_ID, "processing")
 
+@dp.message_handler(commands=['done'])
+async def done_handler(message: Message):
+    await send_task_status(bot, ADMIN_CHAT_ID, "done")
+
+@dp.message_handler(commands=['error'])
+async def error_handler(message: Message):
+    await send_task_status(bot, ADMIN_CHAT_ID, "error")
+
 if __name__ == '__main__':
     executor.start_polling(dp)
