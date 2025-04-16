@@ -10,7 +10,7 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def start_handler(message: Message):
     await message.reply("🔔 Эйнос на связи. Готов присылать уведомления!")
-    await message.reply(f"👤 Ваш chat_id: `{message.chat.id}`", parse_mode="Markdown")
+    await message.reply(f"👤 Ваш chat_id: `{message.chat.id}")
     await send_notification(bot, ADMIN_CHAT_ID, "✨ Бот активирован и работает!")
 
 if __name__ == '__main__':
