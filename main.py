@@ -10,8 +10,8 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def start_handler(message: Message):
     await message.reply("🔔 Эйнос на связи. Готов присылать уведомления!")
-    await message.reply(f"Ваш chat_id: {message.chat.id}")
-    await send_notification(bot, ADMIN_CHAT_ID, "✨ Бот активирован и работает!")
+    await message.reply(f"📎 Ваш chat_id: {message.chat.id}")
+    await send_notification(bot, ADMIN_CHAT_ID, "⚙️ Бот активирован и работает!")
 
 @dp.message_handler(commands=['status'])
 async def status_handler(message: Message):
@@ -30,14 +30,4 @@ async def notify_handler(message: Message):
     await send_notification(bot, ADMIN_CHAT_ID, "🌟 Привет, Алексей! Эйнос на связи. Всё работает как часы.")
 
 if __name__ == '__main__':
-    print("🚀 Bot is starting polling...")
-    from aiohttp import web
-
-async def on_startup(app):
-    await bot.set_webhook('https://einosnasviazibot-production.up.railway.app/webhook')
-
-app = web.Application()
-app.router.add_post('/webhook', dp.router)
-web.run_app(app, port=8080)
-
-
+    executor.start_polling(dp)
