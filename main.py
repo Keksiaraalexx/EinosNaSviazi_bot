@@ -31,5 +31,13 @@ async def notify_handler(message: Message):
 
 if __name__ == '__main__':
     print("🚀 Bot is starting polling...")
-    executor.start_polling(dp)
+    from aiohttp import web
+
+async def on_startup(app):
+    await bot.set_webhook('https://<your-railway-app>.up.railway.app/webhook')
+
+app = web.Application()
+app.router.add_post('/webhook', dp.router)
+web.run_app(app, port=8080)
+
 
