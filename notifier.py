@@ -1,13 +1,15 @@
 from aiogram import Bot
-from aiogram.exceptions import TelegramAPIError, ChatNotFound
+from aiogram.utils.exceptions import BotBlocked, ChatNotFound, TelegramAPIError
 
 async def send_notification(bot: Bot, chat_id: int, text: str):
     try:
         await bot.send_message(chat_id=chat_id, text=text)
     except ChatNotFound:
-        print(f"❌ Ошибка: Чат с ID {chat_id} не найден. Возможно, пользователь не написал первым.")
+        print(f"❌ Чат с ID {chat_id} не найден.")
+    except BotBlocked:
+        print(f"🚫 Бот заблокирован пользователем {chat_id}.")
     except TelegramAPIError as e:
-        print(f"❌ Telegram API error: {e}")
+        print(f"⚠️ Другая ошибка Telegram API: {e}")
 
 async def send_task_status(bot: Bot, chat_id: int, status: str = "processing"):
     if status == "done":
@@ -22,4 +24,4 @@ async def send_task_status(bot: Bot, chat_id: int, status: str = "processing"):
     try:
         await bot.send_message(chat_id=chat_id, text=message)
     except TelegramAPIError as e:
-        print(f"❌ Telegram API error while sending status: {e}")
+        print(f"⚠️ Ошибка при отправке статуса: {e}")
