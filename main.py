@@ -30,4 +30,6 @@ async def notify_handler(message: Message):
     await send_notification(bot, ADMIN_CHAT_ID, "🌟 Привет, Алексей! Эйнос на связи. Всё работает как часы.")
 
 if __name__ == '__main__':
+    print("🚀 Bot is starting polling...")
     executor.start_polling(dp)
+
