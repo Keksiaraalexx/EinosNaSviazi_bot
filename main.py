@@ -34,7 +34,7 @@ if __name__ == '__main__':
     from aiohttp import web
 
 async def on_startup(app):
-    await bot.set_webhook('https://<your-railway-app>.up.railway.app/webhook')
+    await bot.set_webhook('https://einosnasviazibot-production.up.railway.app/webhook')
 
 app = web.Application()
 app.router.add_post('/webhook', dp.router)
